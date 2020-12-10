@@ -22,7 +22,7 @@ class user{
         $db=mysqli_connect("localhost","root","","classes");
         $req="SELECT * FROM `utilisateurs`";
         $query=mysqli_query($db,$req);
-        $all_results=mysqli_fetch_all();
+        $all_results=mysqli_fetch_all($query);
         for($i=0;isset($all_results[$i]);$i++){
             if($all_results[$i][1]==$login && $all_results[$i][2]){
                 $this->id=$all_results[$i][0];
@@ -64,7 +64,7 @@ class user{
         $db=mysqli_connect("localhost","root","","classes");
         $req="SELECT `password` FROM `utilisateurs` WHERE `login`='{$this->login}'";
         $query=mysqli_query($db,$req);
-        $results=mysqli_fetch_assoc();
+        $results=mysqli_fetch_assoc($query);
         $results=[$this->id,$results['password'],$this->login,$this->email,$this->firstname,$this->lastname];
         return $results;
     }
@@ -84,9 +84,9 @@ class user{
     }
     public function refresh(){
         $db=mysqli_connect("localhost","root","","classes");;
-        $req="SELECT * FROM `utilisateurs` WHERE `login`='{$this->login}'";
-        $query=mysqli_query();
-        $results=mysqli_fetch_assoc();
+        $req="SELECT * FROM `utilisateurs` WHERE `id`='{$this->id}'";
+        $query=mysqli_query($db,$req);
+        $results=mysqli_fetch_assoc($query);
         $this->id=$results['id'];
         $this->login=$results['login'];
         $this->email=$results['email'];

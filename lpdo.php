@@ -72,12 +72,5 @@ class lpdo {
 
 }
 
-$test= new lpdo('localhost','root', '','classes');
-
-var_dump($test->execute("SELECT * FROM `utilisateurs`","assoc"));
-echo "<br/>";
-var_dump($test->getFields('utilisateurs'));
-
-
 
 ?>
